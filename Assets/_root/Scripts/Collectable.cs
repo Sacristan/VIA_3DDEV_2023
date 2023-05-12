@@ -6,12 +6,14 @@ public class Collectable : MonoBehaviour
 {
     enum ChickenState
     {
-        None,
-        Patrolling,
-        Idle
+        None = 0,
+        Patrolling = 1,
+        Idle = 2
     }
 
     [SerializeField] float closeEnoughDistance = 1f;
+    [SerializeField] float minIdleWaitTime = 3f;
+    [SerializeField] float maxIdleWaitTime = 10f;
     Animator _animator;
     NavMeshAgent _navMeshAgent;
 
@@ -74,7 +76,7 @@ public class Collectable : MonoBehaviour
 
     IEnumerator IdleRoutine()
     {
-        yield return new WaitForSeconds(Random.Range(3f, 10f));
+        yield return new WaitForSeconds(Random.Range(minIdleWaitTime, maxIdleWaitTime));
         CurrentState = ChickenState.Patrolling;
     }
 
