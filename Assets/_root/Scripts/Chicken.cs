@@ -14,6 +14,11 @@ public class Chicken : Collectable
     [SerializeField] float closeEnoughDistance = 1f;
     [SerializeField] float minIdleWaitTime = 3f;
     [SerializeField] float maxIdleWaitTime = 10f;
+
+    [Header("Laying")]
+    [SerializeField] Transform layLocation;
+    [SerializeField] Egg[] layableEggs;
+
     Animator _animator;
     NavMeshAgent _navMeshAgent;
 
@@ -76,8 +81,19 @@ public class Chicken : Collectable
 
     IEnumerator IdleRoutine()
     {
+        LayAnEgg();
         yield return new WaitForSeconds(Random.Range(minIdleWaitTime, maxIdleWaitTime));
         CurrentState = ChickenState.Patrolling;
+    }
+
+    void LayAnEgg()
+    {
+        if (layableEggs == null || layableEggs.Length == 0) Debug.LogError($"{nameof(Chicken)} there is nothing to lay", gameObject);
+
+        int eggIndex = Random.Range(0, layableEggs.Length);
+        Egg eggPrefab = layableEggs[eggIndex];
+
+        Instantiate(eggPrefab, layLocation.position, Quaternion.Euler(Vector3.up * Random.Range(0, 360)));
     }
 
     bool HasReachedTarget()

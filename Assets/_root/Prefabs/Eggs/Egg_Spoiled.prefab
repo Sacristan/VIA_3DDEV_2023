@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1478383019992977654, guid: 617b3da2f20805844a728fa6b4ffd828,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 293034b44a404dd4ba6dcae707a0d575, type: 2}
+    - target: {fileID: 1630794973134770282, guid: 617b3da2f20805844a728fa6b4ffd828,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a54a6ae0201f1ed4aa1b5345d28809f2, type: 2}
     - target: {fileID: 2294093760885624859, guid: 617b3da2f20805844a728fa6b4ffd828,
         type: 3}
       propertyPath: eggType

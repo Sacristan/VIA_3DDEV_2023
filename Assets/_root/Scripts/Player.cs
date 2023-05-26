@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     void HandleGameEnded()
     {
         GetComponent<CharacterController>().enabled = false;
-        GetComponent<FirstPersonController>().enabled = false;
+        GetComponent<FPSController>().enabled = false;
         GetComponent<PlayerInput>().enabled = false;
     }
 
