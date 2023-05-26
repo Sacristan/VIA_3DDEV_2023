@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    public float MovementDir { get; private set; } = 1;
+
     IEnumerator Start()
     {
         GameManager.instance.OnGameWon += GameWon;
@@ -58,5 +60,13 @@ public class Player : MonoBehaviour
     public void DoIntoxicatedEffect()
     {
         Debug.Log(nameof(DoIntoxicatedEffect));
+        StartCoroutine(IntoxicatedRoutine());
+    }
+
+    IEnumerator IntoxicatedRoutine()
+    {
+        MovementDir = -1;
+        yield return new WaitForSeconds(5f);
+        MovementDir = 1;
     }
 }
