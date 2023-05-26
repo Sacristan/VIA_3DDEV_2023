@@ -5,12 +5,38 @@ using UnityEngine.InputSystem;
 using StarterAssets;
 public class Player : MonoBehaviour
 {
-    void Start()
+    public System.Action<int> OnHealthUpdated;
+    public const int MaxHealth = 100;
+    int _health;
+    public int Health
+    {
+        get => _health;
+        private set
+        {
+            _health = value;
+            OnHealthUpdated?.Invoke(_health);
+        }
+    }
+
+    IEnumerator Start()
     {
         GameManager.instance.OnGameWon += GameWon;
+        yield return null;
+        Health = MaxHealth;
+    }
+
+    void GameLost()
+    {
+        GameManager.instance.GameLost();
+        HandleGameEnded();
     }
 
     void GameWon()
+    {
+        HandleGameEnded();
+    }
+
+    void HandleGameEnded()
     {
         GetComponent<CharacterController>().enabled = false;
         GetComponent<FirstPersonController>().enabled = false;
@@ -20,6 +46,13 @@ public class Player : MonoBehaviour
     public void DoExplosionEffect()
     {
         Debug.Log(nameof(DoExplosionEffect));
+        Health -= 25;
+
+        if (Health <= 0)
+        {
+            HandleGameEnded();
+            GameManager.instance.GameLost();
+        }
     }
 
     public void DoIntoxicatedEffect()
