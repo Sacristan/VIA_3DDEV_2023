@@ -3,6 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    private void Start()
+    {
+        Game.ShowCursor(true);
+    }
+
     public void Play()
     {
         Debug.Log(nameof(Play));

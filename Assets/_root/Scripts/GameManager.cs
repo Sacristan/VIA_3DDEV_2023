@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
             FindObjectsOfType<Collectable>()
         );
         RecalculateObjectives();
+
+        Game.ShowCursor(false);
     }
 
     public void OnCollectableCollected(Collectable collectable)
